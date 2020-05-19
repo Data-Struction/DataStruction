@@ -22,7 +22,7 @@ class Info:
         self.born_rela = born_rela
         self.rela_ship = rela_ship
         self.sex = sex
-        self.datas = {"姓名": name, "出生地": born_place, "出生日期":born_date, "死亡日期":dead_date, "身高":height, "学历":edu_bg, "职业":pos, "最高职务":top_pos, "性别":sex, "亲属":born_rela, "关系":rela_ship}
+        self.datas = {"姓名": name, "出生地": born_place, "出生日期":born_date, "死亡日期":dead_date, "身高":height, "学历":edu_bg, "职业":pos, "最高职务":top_pos,  "亲属":born_rela, "关系":rela_ship, "性别":sex}
         #丘：改动x1 5.10
         
     def edit(self):
@@ -128,5 +128,7 @@ def circle(str, tmp):
 
 #read_file()
 #search_basic()
+add()
+save_file(blist)
 
 
