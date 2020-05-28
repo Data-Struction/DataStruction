@@ -20,6 +20,7 @@ class member:
         self.kids = kids#member类索引list
         self.spouse = spouse#member类索引
 
+
 def buildTree(alist):
     global root
     for i in range(len(alist)):
@@ -27,8 +28,9 @@ def buildTree(alist):
             alist[i]['亲属'] = 'default'
             alist[i]['关系'] = -1
         temp = member(i,[])
+        family.append(temp)
         rela_idx = find_rela(alist[i]['亲属'])
-        if(rela_idx != None or i == 0):#输入根节点或者找到亲属可输入
+        if(rela_idx != None ):#输入根节点或者找到亲属可输入
             family.append(temp)
             n = len(family)-1
             j = alist[i]['关系']#根据关系连接节点
@@ -40,9 +42,8 @@ def buildTree(alist):
                 family[rela_idx].kids.append(n)
             elif j == 2:
                 family[-1].kids.append(root)
-                if(rela_idx == root):#关于根节点得变化一个疑问：新增根节点配偶的父节点，是否变化？
-                    root = n    
-                    
+                if(rela_idx == root and alist[i]['性别'] == '男'):
+                    root = n                        
 
                
 def find_rela(rela_name):#根据alist索引找到family索引

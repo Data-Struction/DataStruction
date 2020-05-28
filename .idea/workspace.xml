@@ -25,7 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/python_project/BasicInfo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2250">
+            <state relative-caret-position="2370">
+              <caret line="118" column="41" lean-forward="true" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -181,7 +182,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/python_project/BasicInfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2250">
+        <state relative-caret-position="2370">
+          <caret line="118" column="41" lean-forward="true" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
