@@ -7,6 +7,7 @@
 import pandas as pd
 import os
 from tkinter import * 
+import tkinter.messagebox 
 import tkinter.font as tkFont
 import tkinter as tk
 from tkinter import ttk
@@ -77,57 +78,68 @@ class PageOne(tk.Frame):
         Label(self,text='姓名：',font=ft3).pack(side=TOP)
         global  name
         name=StringVar()
-        Entry(self,width=60,textvariable=name,font=ft3,bg='Ivory').pack(side=TOP)
+        self.name_ety = Entry(self, width=60, textvariable=name, font=ft3, bg='Ivory')
+        self.name_ety.pack(side=TOP)
         
         Label(self,text='出生地：',font=ft3).pack(side=TOP)
         global born_place
         born_place=StringVar()
-        Entry(self,width=60,textvariable=born_place,font=ft3,bg='Ivory').pack(side=TOP)
+        self.born_place_ety = Entry(self,width=60,textvariable=born_place,font=ft3,bg='Ivory')
+        self.born_place_ety.pack(side=TOP)
         
         Label(self,text='出生日期（如：20001212）：',font=ft3).pack(side=TOP)
-        global  born_date
+        global born_date
         born_date=StringVar()
-        Entry(self,width=60,textvariable=born_date,font=ft3,bg='Ivory').pack(side=TOP)
+        self.born_date_ety = Entry(self,width=60,textvariable=born_date,font=ft3,bg='Ivory')
+        self.born_date_ety.pack(side=TOP)
         
-        Label(self,text='如已过世请输入死亡日期（如：20150301）：，否则输入 0',font=ft3).pack(side=TOP)
+        Label(self,text='如已过世请输入死亡日期（如：20150301），否则输入 0',font=ft3).pack(side=TOP)
         global dead_date
         dead_date=StringVar()
-        Entry(self,width=60,textvariable=dead_date,font=ft3,bg='Ivory').pack(side=TOP)
+        self.dead_date_ety = Entry(self,width=60,textvariable=dead_date,font=ft3,bg='Ivory')
+        self.dead_date_ety.pack(side=TOP)
     
         Label(self,text='身高（如：180.5）：',font=ft3).pack(side=TOP)
         global height
         height=StringVar()
-        Entry(self,width=60,textvariable=height,font=ft3,bg='Ivory').pack(side=TOP)
+        self.height_ety = Entry(self,width=60,textvariable=height,font=ft3,bg='Ivory')
+        self.height_ety.pack(side=TOP)
         
         Label(self,text='学历（请填： 小学 /初中 /高中 /本科 /研究生 /博士）：',font=ft3).pack(side=TOP)
         global edu_bg
         edu_bg=StringVar()
-        Entry(self,width=60,textvariable=edu_bg,font=ft3,bg='Ivory').pack(side=TOP)
+        self.edu_bg_ety = Entry(self,width=60,textvariable=edu_bg,font=ft3,bg='Ivory')
+        self.edu_bg_ety.pack(side=TOP)
         
         Label(self,text='职业：',font=ft3).pack(side=TOP)
-        global  pos
+        global pos
         pos=StringVar()
-        Entry(self,width=60,textvariable=pos,font=ft3,bg='Ivory').pack(side=TOP)
+        self.pos_ety = Entry(self,width=60,textvariable=pos,font=ft3,bg='Ivory')
+        self.pos_ety.pack(side=TOP)
         
         Label(self,text='最高职务：',font=ft3).pack(side=TOP)
         global top_pos
         top_pos=StringVar()
-        Entry(self,width=60,textvariable=top_pos,font=ft3,bg='Ivory').pack(side=TOP)
+        self.top_pos_ety = Entry(self,width=60,textvariable=top_pos,font=ft3,bg='Ivory')
+        self.top_pos_ety.pack(side=TOP)
         
         Label(self,text='亲属姓名（还未生成家谱首次添加成员请勿填写）：',font=ft3).pack(side=TOP)
         global born_rela
         born_rela=StringVar()
-        Entry(self,width=60,textvariable=born_rela,font=ft3,bg='Ivory').pack(side=TOP)
+        self.born_rela_ety = Entry(self,width=60,textvariable=born_rela,font=ft3,bg='Ivory')
+        self.born_rela_ety.pack(side=TOP)
         
         Label(self,text='与该亲属的关系（还未生成家谱首次添加成员请勿填写）（0.是该亲属配偶 1.是该亲属子代 2.是该亲属父代）：',wraplength = 650,font=ft3).pack(side=TOP)
         global rela_ship
         rela_ship=StringVar()
-        Entry(self,width=60,textvariable=rela_ship,font=ft3,bg='Ivory').pack(side=TOP)
+        self.rela_ship_ety = Entry(self,width=60,textvariable=rela_ship,font=ft3,bg='Ivory')
+        self.rela_ship_ety.pack(side=TOP)
         
         Label(self,text='性别：',font=ft3).pack(side=TOP)
         global sex
         sex=StringVar()
-        Entry(self,width=60,textvariable=sex,font=ft3,bg='Ivory').pack(side=TOP)
+        self.sex_ety = Entry(self,width=60,textvariable=sex,font=ft3,bg='Ivory')
+        self.sex_ety.pack(side=TOP)
         
         
         Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(pady=20)
@@ -136,11 +148,25 @@ class PageOne(tk.Frame):
 
 
     def save(self):
-        
         info.blist = []
         info.add(name.get(), born_place.get(), born_date.get(), dead_date.get(), height.get(), edu_bg.get(), pos.get(),                 top_pos.get(), born_rela.get(), rela_ship.get(), sex.get())
         info.save_file(info.blist)
+        self.clean()
+        tkinter.messagebox.showinfo('提示','已存储成员信息，可继续添加')
 
+
+    def clean(self):
+        self.name_ety.delete(0, 'end')
+        self.born_place_ety.delete(0, 'end')
+        self.born_date_ety.delete(0, 'end')
+        self.dead_date_ety.delete(0, 'end')
+        self.height_ety.delete(0, 'end')
+        self.edu_bg_ety.delete(0, 'end')
+        self.pos_ety.delete(0, 'end')
+        self.top_pos_ety.delete(0, 'end')
+        self.born_rela_ety.delete(0, 'end')
+        self.rela_ship_ety.delete(0, 'end')
+        self.sex_ety.delete(0, 'end')
             
             
 #删除学生信息
