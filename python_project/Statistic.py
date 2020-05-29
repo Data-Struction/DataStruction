@@ -34,33 +34,103 @@ def avg_height():
 #平均学历、最高学历、最低学历
 def avg_edu_bg():
     df = pd.read_csv('data.csv')
-    e = round(df['学历'].mean())
-    return Elist[e-1]
-#     if e==1:
-#         print("平均学历：小学")
-#     elif e==2:
-#         print("平均学历：初中")
-#     elif e==3:
-#         print("平均学历：高中")
-#     elif e==4:
-#         print("平均学历：本科")
-#     elif e==5:
-#         print("平均学历：研究生")
-#     elif e==6:
-#         print("平均学历：博士")
+    a1 = list(df['学历'])
+    a2 = []
+    for i in range(len(a1)):
+        if a1[i]=="小学":
+            a2.append(1)
+        elif a1[i]=="初中":
+            a2.append(2)
+        elif a1[i]=="高中":
+            a2.append(3)
+        elif a1[i]=="本科":
+            a2.append(4)
+        elif a1[i]=="研究生":
+            a2.append(5)
+        elif a1[i]=="博士":
+            a2.append(6)
+    sum = 0
+    for i in range(len(a2)):
+        sum+=a2[i]
+    a = round(sum/len(a2))
+#     print("a",a)
+    if a==1:
+        return "平均学历：小学"
+    if a==2:
+        return "平均学历：初中"
+    if a==1:
+        return "平均学历：高中"
+    if a==1:
+        return "平均学历：本科"
+    if a==1:
+        return "平均学历：研究生"
+    if a==1:
+        return "平均学历：博士"
+
 def lowest_edu_bg():
     df = pd.read_csv('data.csv')
-    arr = list(df['学历'])
-    arr.sort()
-    low = int(arr[0])
-    return Elist[low-1]
+    a1 = list(df['学历'])
+    a2 = []
+    for i in range(len(a1)):
+        if a1[i]=="小学":
+            a2.append(1)
+        elif a1[i]=="初中":
+            a2.append(2)
+        elif a1[i]=="高中":
+            a2.append(3)
+        elif a1[i]=="本科":
+            a2.append(4)
+        elif a1[i]=="研究生":
+            a2.append(5)
+        elif a1[i]=="博士":
+            a2.append(6)
+    a2.sort()
+#     print(a2[0])
+    if a2[0]==1:
+        return "最低学历：小学"
+    if a2[0]==2:
+        return "最低学历：初中"
+    if a2[0]==3:
+        return "最低学历：高中"
+    if a2[0]==4:
+        return "最低学历：本科"
+    if a2[0]==5:
+        return "最低学历：研究生"
+    if a2[0]==6:
+        return "最低学历：博士"
+    
 
 def highest_edu_bg():
     df = pd.read_csv('data.csv')
-    arr = list(df['学历'])
-    arr.sort()
-    high = int(arr[-1])
-    return Elist[high-1]
+    a1 = list(df['学历'])
+    a2 = []
+    for i in range(len(a1)):
+        if a1[i]=="小学":
+            a2.append(1)
+        elif a1[i]=="初中":
+            a2.append(2)
+        elif a1[i]=="高中":
+            a2.append(3)
+        elif a1[i]=="本科":
+            a2.append(4)
+        elif a1[i]=="研究生":
+            a2.append(5)
+        elif a1[i]=="博士":
+            a2.append(6)
+    a2.sort()
+#     print(a2[-1])
+    if a2[-1]==1:
+        return "最高学历：小学"
+    if a2[-1]==2:
+        return "最高学历：初中"
+    if a2[-1]==3:
+        return "最高学历：高中"
+    if a2[-1]==4:
+        return "最高学历：本科"
+    if a2[-1]==5:
+        return "最高学历：研究生"
+    if a2[-1]==6:
+        return "最高学历：博士"
         
 #男女比例
 def male_female():

@@ -99,7 +99,7 @@ class PageOne(tk.Frame):
         height=StringVar()
         Entry(self,width=60,textvariable=height,font=ft3,bg='Ivory').pack(side=TOP)
         
-        Label(self,text='学历（输入对应的序号 1.小学 2.初中 3.高中 4.本科 5.研究生 6.博士）：',font=ft3).pack(side=TOP)
+        Label(self,text='学历（请填： 小学 /初中 /高中 /本科 /研究生 /博士）：',font=ft3).pack(side=TOP)
         global edu_bg
         edu_bg=StringVar()
         Entry(self,width=60,textvariable=edu_bg,font=ft3,bg='Ivory').pack(side=TOP)
@@ -227,7 +227,7 @@ class PageThree(tk.Frame):
         
         
         
-#z亲戚关系查询成员信息
+#亲戚关系查询成员信息
 class PageFour(tk.Frame):
     def __init__(self, parent, root):
         super().__init__(parent)
@@ -257,7 +257,7 @@ class PageFour(tk.Frame):
         p4=StringVar()
         Entry(self,width=30,textvariable=p4,font=ft3,bg='Ivory').pack(side=TOP)
         
-        Button(self, text="确定查询",width=8,font=ft4, command = self.searchB).pack(pady=20)
+        Button(self, text="确定查询",width=8,font=ft4, command = self.searchA).pack(pady=20)
         Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(pady=10)
         
     def searchA(self):
@@ -265,13 +265,9 @@ class PageFour(tk.Frame):
         tb.buildTree(info.alist)
         ft4=tkFont.Font(size=12)
         str2 = tb.search_rela_info(p1.get(), p2.get(), p3.get(), p4.get())
-        Label(self,text=str2,wraplength = 670,font=ft4).pack()
+        Label(self,text=str2,font=ft4).pack()
         
-    def searchB(self):
-        info.read_file()
-        ft4=tkFont.Font(size=12)
-        str2 = info.search_basic(p5.get(), p6.get())
-        Label(self,text=str2,wraplength = 670,font=ft4).pack()
+
         
    
 
@@ -284,24 +280,24 @@ class PageFive(tk.Frame):
         ft3=tkFont.Font(size=14)
         ft4=tkFont.Font(size=12)
         
-        Label(self,text='请选择要按照成员的 “1.姓名 2.出生地 3.出生日期” 查询 ',font=ft3, justify=LEFT).pack(side=TOP)
+        Label(self,text='请选择要按照成员的 “1.姓名 2.出生地 3.出生日期 4.死亡日期 5.身高 6.学历 7.职业 8.最高职务 9.性别',wraplength = 650,font=ft3, justify=LEFT).pack(side=TOP)
         global p5
         p5=StringVar()
         Entry(self,width=30,textvariable=p5,font=ft3,bg='Ivory').pack(side=TOP)
         
-        Label(self,text='请输入带查询成员的姓名 /出生地 /出生日期 ',font=ft3, justify=LEFT).pack(side=TOP)
+        Label(self,text='请输入带查询成员的姓名/出生地/出生日期/死亡日期/身高/学历/职业/最高职务/性别 ',font=ft3, justify=LEFT).pack(side=TOP)
         global p6
         p6=StringVar()
         Entry(self,width=30,textvariable=p6,font=ft3,bg='Ivory').pack(side=TOP)
         
         Button(self, text="确定查询",width=8,font=ft4, command = self.searchB).pack(pady=20)
-        Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(pady=10)
+        Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(side=TOP)
         
     def searchB(self):
         info.read_file()
         ft4=tkFont.Font(size=12)
         str2 = info.search_basic(p5.get(), p6.get())
-        Label(self,text=str2,wraplength = 670,font=ft4).pack()
+        Label(self,text=str2,wraplength = 1300,font=ft4).pack()
         
             
 #统计成员信息

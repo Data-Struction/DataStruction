@@ -2,7 +2,7 @@ import pandas as pd
 import os 
 alist = []
 blist = []
-title = ["姓名", "出生地", "出生日期", "死亡日期", "身高", "学历", "职业", "最高职务", "亲属", "关系", "性别"]
+title = ["姓名", "出生地", "出生日期", "死亡日期", "身高", "学历", "职业", "最高职务", "性别"]
 pd.set_option("display.max_rows", None)
 cur_filename = "data.csv"
 #df = pd.read_csv("data.csv", encoding="utf-8")
@@ -108,23 +108,25 @@ def add_in_list(li, person):
     li.append(person)
 
 
-def search_basic():
+def search_basic(p5, p6):
     print("->已选择 查询基本信息")
-    func = input("1.“姓名”查询 2.“出生地”查询 3.“出生日期”查询 4.“死亡日期”查询 5.“身高”查询, 6.“学历”查询, 7.“职业”查询, 8.“最高职务”查询, 9.“亲属”查询, 10.“关系”查询, 11.“性别”查询 0.退出功能")
-    func = int(func)
+#     func = input("1.“姓名”查询 2.“出生地”查询 3.“出生日期”查询 4.“死亡日期”查询 5.“身高”查询, 6.“学历”查询, 7.“职业”查询, 8.“最高职务”查询,9.“性别”查询 0.退出功能")
+    func = int(p5)
     if func == 0:
         return
-    str = "请输入要查询的{}：".format(title[func - 1])
-    tmp = input(str)
-    if func == 3 or 4 or 5 or 6 or 10:
+#     str = "请输入要查询的{}：".format(title[func - 1])
+    tmp = p6
+    if func==3 or func == 4 or func ==5:
         tmp = int(tmp)
     result = circle(title[func - 1], tmp)
     if result == -1:
-        print("您所查询的成员不存在哦")
+        return "您所查询的成员不存在哦"
     else:
-        print("您所查询的成员信息：")
+        str0 = "您所查询的成员信息："
+        str1=''
         for i in result:
-            print(alist[i])
+            str1 += (str(alist[i])+'\n')
+        return (str0+'\n'+str1)
 
 
 def circle(str, tmp):
@@ -137,8 +139,8 @@ def circle(str, tmp):
     else:
         return -1
 
-read_file()
-search_basic()
+# read_file()
+# search_basic()
 
 
 
