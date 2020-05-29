@@ -280,7 +280,7 @@ class PageFive(tk.Frame):
         ft3=tkFont.Font(size=14)
         ft4=tkFont.Font(size=12)
         
-        Label(self,text='请选择要按照成员的 “1.姓名 2.出生地 3.出生日期 4.死亡日期 5.身高 6.学历 7.职业 8.最高职务 9.性别',wraplength = 650,font=ft3, justify=LEFT).pack(side=TOP)
+        Label(self,text='请选择要按照成员的 1.姓名 2.出生地 3.出生日期 4.死亡日期 5.身高 6.学历 7.职业 8.最高职务 9.性别 查询',wraplength = 650,font=ft3, justify=LEFT).pack(side=TOP)
         global p5
         p5=StringVar()
         Entry(self,width=30,textvariable=p5,font=ft3,bg='Ivory').pack(side=TOP)
