@@ -110,12 +110,14 @@ def add_in_list(li, person):
 
 def search_basic():
     print("->已选择 查询基本信息")
-    func = input("1.“姓名”查询 2.“出生地”查询 3.“出生日期”查询 0.退出功能")
+    func = input("1.“姓名”查询 2.“出生地”查询 3.“出生日期”查询 4.“死亡日期”查询 5.“身高”查询, 6.“学历”查询, 7.“职业”查询, 8.“最高职务”查询, 9.“亲属”查询, 10.“关系”查询, 11.“性别”查询 0.退出功能")
     func = int(func)
     if func == 0:
         return
     str = "请输入要查询的{}：".format(title[func - 1])
     tmp = input(str)
+    if func == 3 or 4 or 5 or 6 or 10:
+        tmp = int(tmp)
     result = circle(title[func - 1], tmp)
     if result == -1:
         print("您所查询的成员不存在哦")
@@ -135,8 +137,8 @@ def circle(str, tmp):
     else:
         return -1
 
-#read_file()
-#search_basic()
+read_file()
+search_basic()
 
 
 

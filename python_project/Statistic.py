@@ -98,16 +98,20 @@ def avg_age():
 global plist
 plist={}
 def get_p(parent,layer):
-#     plist[layer] = 1
-    if parent.spouse != -1:
-        plist[layer] = 2
-    if len(parent.kids) == 0:
-        return 
-    k = 1
-    for kid in parent.kids:
-        plist[layer] += 1
-        get_p(family[kid],layer+k)
-        k+=1
+    if parent.spouse!=-1 or len(parent.kids)!=0:
+        plist[layer] = 1
+        if parent.spouse != -1:
+            plist[layer] +=1
+#         print(plist)
+        if len(parent.kids) == 0:
+            return 
+        k = 1
+        for kid in parent.kids:
+            plist[layer] += 1
+            get_p(family[kid],layer+k)
+            k+=1
+    else:
+        return
 
 def avg_people():#计算平均人口
     get_p(family[root], 0)

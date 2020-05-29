@@ -28,17 +28,17 @@ class APP(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
         
         self.frames = {}
-        for F in (StartPage, PageOne, PageTwo, PageThree,PageFour,PageFive):
+        for F in (StartPage, PageOne, PageTwo, PageThree,PageFour,PageFive,PageSix):
             frame = F(container, self)
             self.frames[F] = frame
-            frame.grid(row=0, column=0, sticky="nsew")  # 四个页面的位置都是 grid(row=0, column=0), 位置重叠，只有最上面的可见！！
+            frame.grid(row=0, column=0, sticky="nsew")  # 四个页面的位置都是 grid(row=0, column=0), 位置重叠，只有最上面的可见
                 
         self.show_frame(StartPage)
    
            
     def show_frame(self, cont):
         frame = self.frames[cont]
-        frame.tkraise() # 切换，提升当前 tk.Frame z轴顺序（使可见）！！此语句是本程序的点睛之处
+        frame.tkraise() # 切换
             
             
 #主页面
@@ -52,10 +52,11 @@ class StartPage(tk.Frame):
         Button(self, text="添加成员信息",command=lambda: root.show_frame(PageOne),width=30,height=2,fg='white',bg='gray',activebackground='black',activeforeground='white').pack()
         Button(self, text="删除成员信息",command=lambda: root.show_frame(PageTwo),width=30,height=2).pack()
         Button(self, text="修改成员信息",command=lambda: root.show_frame(PageThree),width=30,height=2,fg='white',bg='gray',activebackground='black',activeforeground='white').pack()
-        Button(self, text="查询成员信息",command=lambda: root.show_frame(PageFour),width=30,height=2).pack()
-        Button(self, text="统计成员信息",command=lambda: root.show_frame(PageFive),width=30,height=2,fg='white',bg='gray',activebackground='black',activeforeground='white').pack()
-        Button(self,text='树形显示',height=2,width=30,command=self.TS).pack()
-        Button(self, text="退出系统",command=root.destroy,width=30,height=2,fg='white',bg='gray',activebackground='black',activeforeground='white').pack()
+        Button(self, text="亲戚关系查询成员信息",command=lambda: root.show_frame(PageFour),width=30,height=2).pack()
+        Button(self, text="基本信息查询成员信息",command=lambda: root.show_frame(PageFive),width=30,height=2,fg='white',bg='gray',activebackground='black',activeforeground='white').pack()
+        Button(self, text="统计成员信息",command=lambda: root.show_frame(PageSix),width=30,height=2).pack()
+        Button(self,text='树形显示',command=self.TS, width=30,height=2,fg='white',bg='gray',activebackground='black',activeforeground='white').pack()
+        Button(self, text="退出系统",command=root.destroy,width=30,height=2).pack()
             
     def TS(self):
         info.read_file()#三行测试功能函数，可删除
@@ -156,8 +157,8 @@ class PageTwo(tk.Frame):
         e1=StringVar()
         Entry(self,width=30,textvariable=e1,font=ft3,bg='Ivory').pack()
         
-        Button(self, text="确定删除",width=8,font=ft4,command=self.dell).pack(side=TOP)
-        Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(side=TOP)
+        Button(self, text="确定删除",width=8,font=ft4,command=self.dell).pack(pady=20)
+        Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(pady=10)
 
     def dell(self):
         info.read_file()
@@ -226,11 +227,11 @@ class PageThree(tk.Frame):
         
         
         
-#查询成员信息
+#z亲戚关系查询成员信息
 class PageFour(tk.Frame):
     def __init__(self, parent, root):
         super().__init__(parent)
-        label = tk.Label(self, text="查询成员亲戚关系")
+        label = tk.Label(self, text="按照亲戚关系查询成员")
         label.pack(pady=10)
         ft3=tkFont.Font(size=14)
         ft4=tkFont.Font(size=12)
@@ -256,19 +257,55 @@ class PageFour(tk.Frame):
         p4=StringVar()
         Entry(self,width=30,textvariable=p4,font=ft3,bg='Ivory').pack(side=TOP)
         
-        Button(self, text="确定查询",width=8,font=ft4, command = self.search).pack(pady=20)        
-        Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(pady=30)
+        Button(self, text="确定查询",width=8,font=ft4, command = self.searchB).pack(pady=20)
+        Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(pady=10)
         
-    def search(self):
+    def searchA(self):
         info.read_file()
         tb.buildTree(info.alist)
         ft4=tkFont.Font(size=12)
         str2 = tb.search_rela_info(p1.get(), p2.get(), p3.get(), p4.get())
         Label(self,text=str2,wraplength = 670,font=ft4).pack()
-            
+        
+    def searchB(self):
+        info.read_file()
+        ft4=tkFont.Font(size=12)
+        str2 = info.search_basic(p5.get(), p6.get())
+        Label(self,text=str2,wraplength = 670,font=ft4).pack()
+        
+   
+
+#基本信息查询成员
+class PageFive(tk.Frame):
+    def __init__(self, parent, root):
+        super().__init__(parent)
+        label = tk.Label(self, text="按照成员信息查询成员")
+        label.pack(pady=10)
+        ft3=tkFont.Font(size=14)
+        ft4=tkFont.Font(size=12)
+        
+        Label(self,text='请选择要按照成员的 “1.姓名 2.出生地 3.出生日期” 查询 ',font=ft3, justify=LEFT).pack(side=TOP)
+        global p5
+        p5=StringVar()
+        Entry(self,width=30,textvariable=p5,font=ft3,bg='Ivory').pack(side=TOP)
+        
+        Label(self,text='请输入带查询成员的姓名 /出生地 /出生日期 ',font=ft3, justify=LEFT).pack(side=TOP)
+        global p6
+        p6=StringVar()
+        Entry(self,width=30,textvariable=p6,font=ft3,bg='Ivory').pack(side=TOP)
+        
+        Button(self, text="确定查询",width=8,font=ft4, command = self.searchB).pack(pady=20)
+        Button(self, text="返回首页",width=8,font=ft4,command=lambda: root.show_frame(StartPage)).pack(pady=10)
+        
+    def searchB(self):
+        info.read_file()
+        ft4=tkFont.Font(size=12)
+        str2 = info.search_basic(p5.get(), p6.get())
+        Label(self,text=str2,wraplength = 670,font=ft4).pack()
+        
             
 #统计成员信息
-class PageFive(tk.Frame):
+class PageSix(tk.Frame):
 
     def __init__(self, parent, root):
 
